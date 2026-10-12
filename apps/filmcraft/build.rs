@@ -20,9 +20,9 @@ mod windows {
     pub fn embed_resources() {
         let mut res = winresource::WindowsResource::new();
         res.set_icon("../../assets/app-icon/filmcraft.ico")
-            .set("ProductName", "FilmCraft")
-            .set("FileDescription", "FilmCraft video editor")
-            .set("LegalCopyright", "Copyright (c) the FilmCraft contributors. MIT OR Apache-2.0.")
+            .set("ProductName", "Tend's Film")
+            .set("FileDescription", "Tend's Film video editor")
+            .set("LegalCopyright", "Copyright (c) the Tend's Film contributors. MIT OR Apache-2.0.")
             .set("OriginalFilename", "filmcraft.exe")
             .set("InternalName", "filmcraft");
         if let Err(e) = res.compile() {

@@ -1,4 +1,4 @@
-//! FCPXML point markers: a one-frame `<marker>` is a FilmCraft point (duration 0), not a range.
+//! FCPXML point markers: a one-frame `<marker>` is a Tend's Film point (duration 0), not a range.
 
 mod support;
 

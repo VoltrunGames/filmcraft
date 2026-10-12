@@ -459,7 +459,7 @@ fn flac_is_lossless_against_wav() {
     let si = &fb[8..42];
     assert_eq!((u64::from(si[13] & 0x0F) << 32) | u64::from(u32::from_be_bytes(si[14..18].try_into().unwrap())), 72_000);
 
-    // the same samples through FilmCraft's own readers
+    // the same samples through Tend's Film's own readers
     let decode = |name: &str, bytes: Vec<u8>| filmcraft_codecs::open_bytes(name, bytes.into()).unwrap().audio(0, 72_000, 48_000).unwrap();
     let (a, b) = (decode("a.wav", wb), decode("a.flac", fb));
     assert_eq!(a.channels.len(), 2);
@@ -512,7 +512,7 @@ fn flac_audio_in_mp4_and_mov() {
         assert!(si[4..10].iter().any(|&b| b != 0), "{name}: frame sizes");
         assert_eq!(u32::from_be_bytes(si[14..18].try_into().unwrap()), 72_000, "{name}: total samples");
         assert!(si[18..34].iter().any(|&b| b != 0), "{name}: MD5");
-        // FilmCraft's own importer reads the FLAC track back, sample-accurately long
+        // Tend's Film's own importer reads the FLAC track back, sample-accurately long
         let src = filmcraft_codecs::open_bytes(name, bytes.into()).unwrap();
         let a = src.audio(0, 72_000, 48_000).unwrap();
         assert!(a.channels.iter().all(|c| c.len() == 72_000) && a.channels[0].iter().any(|v| v.abs() > 0.1), "{name}");
@@ -822,7 +822,7 @@ fn metadata_and_quicktime_multiplexer() {
     let dir = Scratch::new("meta");
     let path = dir.path("m.mov");
     let mut s = ExportSettings { format: Format::H264, path: path.clone(), multiplexer: Multiplexer::Mov, ..Default::default() };
-    s.metadata = ExportMetadata { title: "Test Title".into(), creator: "FilmCraft Tests".into(), copyright: "CC0".into(), ..Default::default() };
+    s.metadata = ExportMetadata { title: "Test Title".into(), creator: "Tend's Film Tests".into(), copyright: "CC0".into(), ..Default::default() };
     s.audio.codec = AudioCodec::Pcm;
     s.audio.bits = 24;
     assert_eq!(s.extension(), "mov");
